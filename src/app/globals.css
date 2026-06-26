@@ -866,7 +866,104 @@ main {
 .nav-link.active {
   color: #8e0101;
 }
+@media (max-width: 992px) {
+  .navbar {
+    width: 100%;
+    left: 0;
+    padding: 8px 10px;
+    border-radius: 0 0 14px 14px;
+  }
 
+  .navbar-container {
+    max-width: 100%;
+  }
+
+  .navbar-logo img {
+    width: 115px;
+    height: auto;
+  }
+
+  .menu-btn {
+    display: flex;
+  }
+
+  .talk-btn {
+    display: none;
+  }
+
+  .navbar-menu {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 56px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+
+    padding: 8px 10px 24px;
+    background: #ffffff;
+    overflow-y: auto;
+
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .navbar-menu.open {
+    transform: translateX(0);
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 10px 8px;
+    font-size: 13px;
+    justify-content: space-between;
+  }
+
+  .nav-dropdown {
+    width: 100%;
+  }
+
+  .mega-panel {
+    position: static;
+    width: 100%;
+    min-width: 100%;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    box-shadow: none;
+    background: #f5eeee;
+    border-radius: 8px;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav-dropdown.open .mega-panel {
+    max-height: 220px;
+    padding: 6px;
+    overflow-y: auto;
+  }
+
+  .mega-item {
+    padding: 9px 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-menu {
+    top: 54px;
+    height: calc(100vh - 54px);
+  }
+
+  .nav-link {
+    padding: 9px 8px;
+    font-size: 12px;
+  }
+}
 /* MEGA MENU */
 
 /* MEGA MENU */
@@ -1989,7 +2086,7 @@ main.advisory-page .pagination-pages {
   margin-top: 6px;
   position: relative;
   width: 100%;
-  padding: 40px 0;
+  padding: 40px 16px;
   display: flex;
   justify-content: center;
   background: #f6f6f6;
@@ -1998,9 +2095,10 @@ main.advisory-page .pagination-pages {
 
 .hero-image {
   width: 100%;
-  margin-top: 10px;
   max-width: 1400px;
-  height: 600px;
+  height: auto;
+  max-height: 600px;
+  aspect-ratio: 16 / 7;
   object-fit: cover;
   object-position: center;
   display: block;
@@ -2009,18 +2107,18 @@ main.advisory-page .pagination-pages {
 
 .scroll-btn {
   position: absolute;
-  right: 55px;
-  bottom: 65px;
+  right: clamp(20px, 5vw, 55px);
+  bottom: clamp(35px, 7vw, 65px);
   z-index: 20;
 
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 
   padding: 14px 22px;
   border: none;
   border-radius: 50px;
-
   background: #8e0101;
   color: #fff;
 
@@ -2036,56 +2134,38 @@ main.advisory-page .pagination-pages {
 }
 
 /* Tablet */
-@media (max-width: 992px) {
-  .scroll-btn {
-    right: 35px;
-    bottom: 35px;
-    padding: 12px 18px;
-    font-size: 14px;
-    gap: 8px;
-  }
-}
-
-/* Mobile */
 @media (max-width: 768px) {
-  .scroll-btn {
-    right: 60px;
-    bottom: 35px;
-
-    padding: 10px 14px;
-    font-size: 12px;
-    gap: 2px;
-
-    border-radius: 30px;
+  .hero-section {
+    margin-top: 25px;
+    padding: 15px 0;
   }
 
-  .scroll-btn svg {
-    width: 14px;
-    height: 14px;
+  .hero-image {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 0;
+  }
+
+  .scroll-btn {
+    right: 18px;
+    bottom: 25px;
   }
 }
 
-/* Small Mobile */
 @media (max-width: 480px) {
+  .hero-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
   .scroll-btn {
-    right: 25px;
-    bottom: 125px;
-
-    width: 45px;
-    height: 45px;
-    padding: 0;
-
-    border-radius: 50%;
-    justify-content: center;
-  }
-
-  .scroll-btn span {
-    display: none; /* Hide text on very small screens */
-  }
-
-  .scroll-btn svg {
-    width: 18px;
-    height: 18px;
+    right: 18px;
+    bottom: 25px;
   }
 }
 /* =========================================================

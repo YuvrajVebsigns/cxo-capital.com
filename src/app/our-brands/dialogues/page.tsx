@@ -22,25 +22,25 @@ const cards = [
     title: 'Events',
     description:
       'Participate in exclusive conferences, leadership summits, networking forums and executive roundtables designed for ICT decision-makers.',
-    image: '/assets/aboutus/event1.png',
+    image: '/assets/aboutus/event.png',
   },
   {
     title: 'Winners',
     description:
       'Celebrating outstanding CIOs, technology leaders and organizations driving innovation and digital transformation across industries.',
-    image: '/assets/aboutus/winner1.png',
+    image: '/assets/aboutus/winner.png',
   },
   {
     title: 'Speakers',
     description:
       'Learn from renowned CIOs, CTOs, CISOs and industry experts sharing real-world experiences, trends and strategic insights.',
-    image: '/assets/aboutus/speaker1.png',
+    image: '/assets/aboutus/speaker.png',
   },
   {
     title: 'Partners',
     description:
       'Connect with leading technology companies, solution providers and strategic partners to build lasting business relationships.',
-    image: '/assets/aboutus/partner1.png',
+    image: '/assets/aboutus/partner.png',
   },
 ];
 
