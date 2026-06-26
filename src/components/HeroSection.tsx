@@ -1,0 +1,33 @@
+'use client';
+
+import Image from 'next/image';
+import { ArrowDown } from 'lucide-react';
+
+export default function HeroSection() {
+  const handleScroll = () => {
+    window.scrollBy({
+      top: window.innerHeight,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <section className="hero-section">
+      <Image
+        src="/assets/hero/hero1.png"
+        alt="CIO Choice"
+        width={1400}
+        height={800}
+        priority
+        className="hero-image"
+      />
+
+      <button onClick={handleScroll} className="scroll-btn" aria-label="Scroll Down">
+        <span>Scroll Down</span>
+        <ArrowDown size={18} />
+      </button>
+
+      <div className="hero-overlay" />
+    </section>
+  );
+}
