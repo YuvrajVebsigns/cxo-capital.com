@@ -416,10 +416,8 @@ export default function EventDetailsPage() {
               </div>
             ) : null}
 
-            <div style={{ marginTop: 24 }}>
-              {/* <Link href="/register" className="talk-btn">
-                    Registration
-                  </Link> */}
+            {/* <div style={{ marginTop: 24 }}>
+             
               <Link href="/register" className="talk-btn">
                 <span>Registration</span>
 
@@ -427,6 +425,18 @@ export default function EventDetailsPage() {
                   <ArrowUpRight size={18} />
                 </div>
               </Link>
+            </div> */}
+
+            <div className="event-registration-wrap">
+              {' '}
+              <Link href="/register" className="event-action-btn">
+                {' '}
+                <span>Registration</span>{' '}
+                <span className="event-action-btn-icon">
+                  {' '}
+                  <ArrowUpRight size={18} />{' '}
+                </span>{' '}
+              </Link>{' '}
             </div>
 
             <div style={{ marginTop: 24 }}>
