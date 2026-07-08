@@ -2583,8 +2583,6 @@ main.advisory-page .pagination-pages {
   transform: translateX(6px);
 }
 
-
-
 /* =========================================================
    EXPERTISE SECTION
 ========================================================= */
@@ -3293,7 +3291,6 @@ main.advisory-page .pagination-pages {
 /* =====================================================
    PROJECT SECTION
 ========================================================= */
-
 
 /* =========================================================
    EVENT DETAILS: Quote styling
@@ -4827,7 +4824,6 @@ main.advisory-page .pagination-pages {
   }
 }
 
-
 .contact-form-area {
   position: relative;
   padding: 36px 40px;
@@ -5428,7 +5424,6 @@ main.advisory-page .pagination-pages {
 .blog-breadcrumb span {
   color: white;
 }
-
 
 /* =========================================================
    BLOG PAGE
