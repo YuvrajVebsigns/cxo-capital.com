@@ -81,9 +81,9 @@ export default function ProjectsSection() {
     <section className="project-section">
       <div className="project-container">
         <div className="project-heading">
-          <h2 className="project-title">
+          {/* <h2 className="project-title">
             Our Work <span>Highlights.</span>
-          </h2>
+          </h2> */}
         </div>
 
         <div className="project-top-bar">
@@ -95,14 +95,22 @@ export default function ProjectsSection() {
               height={20}
               className="expertise-label-icon"
             />
-            <span>CUSTOM EVENTS</span>
+            <span>OUR EVENTS</span>
           </h6>
 
-          <Link href="/events" className="talk-btn">
+          {/* <Link href="/events" className="talk-btn1">
             <span>More Events</span>
             <div className="talk-btn-icon">
               <ArrowUpRight size={18} />
             </div>
+          </Link> */}
+
+          <Link href="/events" className="blogs-more-btn">
+            <span>More Events </span>
+
+            <span className="blogs-more-icon">
+              <ArrowUpRight size={16} />
+            </span>
           </Link>
         </div>
 

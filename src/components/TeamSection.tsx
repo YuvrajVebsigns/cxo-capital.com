@@ -69,12 +69,10 @@ export default function TeamSection() {
                 height={20}
                 className="expertise-label-icon"
               />
-              <span className="blogs-subtitle-text">MEET OUR TEAM</span>
+              <span className="blogs-subtitle-text">LEADERSHIP TEAM</span>
             </span>
 
             <h2 className="team-title">
-              Meet the
-              <br />
               Mind Behind
               <br />
               Our Success.

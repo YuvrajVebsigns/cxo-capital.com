@@ -393,7 +393,7 @@ export default function Navbar() {
             Events
           </Link>
 
-          <Link href="/gallery" className="nav-link" onClick={closeMobileMenu}>
+          <Link href="/CXOUnfiltered" className="nav-link" onClick={closeMobileMenu}>
             CXO Unfiltered
           </Link>
 

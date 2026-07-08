@@ -86,15 +86,15 @@ export default function AboutCioChoiceSection() {
               height={20}
               className="expertise-label-icon"
             />
-            <span className="about-cio-label-text">About Us</span>
+            <span className="about-cio-label-text">ABOUT CXO CAPITAL</span>
           </div>
 
-          <h2 className="about-cio-title">
+          {/* <h2 className="about-cio-title">
             ABOUT <span>CIO CHOICE</span>
-          </h2>
+          </h2> */}
 
           <p className="about-cio-description">
-            CIO Choice is a powerful recognition platform for ICT brands to promote their products,
+            CXO Capital is a powerful recognition platform for ICT brands to promote their products,
             services and solutions among CIOs and digital leaders.
           </p>
         </div>
