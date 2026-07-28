@@ -9,19 +9,19 @@ export default function TeamSection() {
     {
       name: 'Anoop Mathur',
       role: 'Founder',
-      image: '/assets/team/Anoop-Mathur.png',
+      image: '/assets/team/AnoopMathur1.png',
       linkedin: 'https://www.linkedin.com/in/mathuranoop',
     },
     {
       name: 'Sudhir Kamath',
       role: 'Country Director',
-      image: '/assets/team/Sudhir-Kamath.png',
+      image: '/assets/team/Sudhir-Kamath1.png',
       linkedin: 'https://www.linkedin.com/in/sudhir-kamath-9a6baa4',
     },
     {
       name: 'Sadanand Manda',
       role: 'Head Sales & Event Operations',
-      image: '/assets/team/Sadanand-Manda.png',
+      image: '/assets/team/Sadanand-Manda1.png',
       linkedin: 'https://www.linkedin.com/in/sadanandmanda',
     },
   ];
@@ -72,11 +72,11 @@ export default function TeamSection() {
               <span className="blogs-subtitle-text">LEADERSHIP TEAM</span>
             </span>
 
-            <h2 className="team-title">
+            {/* <h2 className="team-title">
               Mind Behind
               <br />
               Our Success.
-            </h2>
+            </h2> */}
           </div>
 
           {/* RIGHT GRID */}

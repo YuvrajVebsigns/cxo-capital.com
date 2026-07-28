@@ -133,6 +133,14 @@ export default function Navbar() {
             Home
           </Link>
 
+          <Link
+            href="/aboutus"
+            className={`nav-link ${pathname?.startsWith('/aboutus') ? 'active' : ''}`}
+            onClick={closeMobileMenu}
+          >
+            About Us
+          </Link>
+
           <div
             className={`nav-dropdown advisory-dropdown ${advisoryOpen ? 'open' : ''}`}
             onMouseEnter={() => !isMobile && openDropdown('advisory')}
