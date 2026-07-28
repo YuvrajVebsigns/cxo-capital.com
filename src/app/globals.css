@@ -789,12 +789,19 @@ main {
    NAVBAR — DESKTOP
 ========================================================= */
 
+/* =========================================================
+   STICKY/FIXED NAVBAR
+========================================================= */
+
 .navbar {
   width: calc(100% - 24px);
   min-height: 76px;
+
   position: fixed;
   top: 0;
   left: 12px;
+  right: 12px;
+
   z-index: 9999;
 
   padding: 12px 24px;
@@ -802,30 +809,31 @@ main {
 
   background: rgba(255, 255, 255, 0.98);
   border-radius: 0 0 23px 23px;
+
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
+  box-shadow: 0 5px 24px rgba(0, 0, 0, 0.08);
+
   transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     background-color 0.3s ease,
     box-shadow 0.3s ease;
 
-  will-change: transform;
+  will-change: auto;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-.navbar-hide {
-  transform: translate3d(0, -110%, 0);
-}
-
+/* Keep navbar visible at all times */
+.navbar-hide,
 .navbar-show {
-  transform: translate3d(0, 0, 0);
+  transform: translateY(0) !important;
 }
 
+/* Optional shadow when scrolled */
 .navbar.scrolled,
 .navbar.mobile-open {
-  box-shadow: 0 5px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 .navbar-container {
@@ -2226,7 +2234,7 @@ main.advisory-page .pagination-pages {
 
 .founder-message-container {
   max-width: 1150px;
-  margin: 0 auto;
+  margin: 10px auto;
   display: grid;
   grid-template-columns: 360px 1fr;
   align-items: stretch;
@@ -2248,7 +2256,7 @@ main.advisory-page .pagination-pages {
 }
 
 .founder-image-wrapper::before {
-  content: 'FOUNDER';
+  content: '';
   position: absolute;
   left: 22px;
   top: 28px;
@@ -2264,6 +2272,7 @@ main.advisory-page .pagination-pages {
   z-index: 2;
   width: 270px;
   height: 350px;
+  bottom: 60px;
   padding: 9px;
   background: rgba(255, 255, 255, 0.18);
   border-radius: 150px 150px 24px 24px;
