@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'CXO-Capital',
+  title: 'CXO-CAPITAL',
   description: 'CXO-Capital Dashboard — Manage users, media, and system settings.',
   keywords: ['admin', 'dashboard', 'core media', 'management'],
   robots: 'noindex, nofollow',

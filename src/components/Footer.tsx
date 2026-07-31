@@ -110,7 +110,7 @@ export default function Footer() {
                 <Phone size={15} />
               </span>
 
-              <span className="footer-contact-text">+91 7506035537</span>
+              <span className="footer-contact-text">+91 22 4608 0974</span>
             </a>
 
             <div className="footer-contact-item">

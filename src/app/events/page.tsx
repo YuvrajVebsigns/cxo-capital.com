@@ -317,7 +317,14 @@ export default function EventsPage() {
 
           <div className="blog-breadcrumb">
             <Link href="/" className="blog-breadcrumb-home">
-              🏦 Home
+              <Image
+                src="/assets/home/home.png" // Replace with your image path
+                alt="Home"
+                width={28}
+                height={38}
+                className="blog-home-icon"
+              />
+              <span>Home</span>
             </Link>
 
             <span>&gt;</span>

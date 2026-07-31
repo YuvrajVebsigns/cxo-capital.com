@@ -255,57 +255,6 @@ export default function Navbar() {
               </div>
             </div> */}
 
-          <div
-            className={`nav-dropdown ${redCarpetOpen ? 'open' : ''}`}
-            onMouseEnter={() => !isMobile && openDropdown('redCarpet')}
-            onMouseLeave={() => !isMobile && closeDropdowns()}
-          >
-            <button
-              type="button"
-              className={`nav-link ${pathname?.startsWith('/ict-echo-system') ? 'active' : ''}`}
-              aria-expanded={redCarpetOpen}
-              onClick={() => {
-                setRedCarpetOpen((s) => !s);
-                setAdvisoryOpen(false);
-                // setRecognizedOpen(false);
-                setMediaOpen(false);
-              }}
-            >
-              ICT Ecosystem
-              <ChevronDown
-                size={16}
-                style={{
-                  transform: redCarpetOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                  transition: '0.3s ease',
-                }}
-              />
-            </button>
-
-            <div className="mega-panel nav-year-dropdown">
-              <ul>
-                <li>
-                  <Link
-                    href="/ict-echo-system/cxo-hub"
-                    className="mega-item"
-                    onClick={closeMobileMenu}
-                  >
-                    CXO Hub
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    href="/ict-echo-system/industry-giants"
-                    className="mega-item"
-                    onClick={closeMobileMenu}
-                  >
-                    Industry Giants & B2B Startups
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
           {/* <div
             className={`nav-dropdown ${recognizedOpen ? 'open' : ''}`}
             onMouseEnter={() => !isMobile && openDropdown('recognized')}
@@ -400,6 +349,57 @@ export default function Navbar() {
           <Link href="/events" className="nav-link" onClick={closeMobileMenu}>
             Events
           </Link>
+
+          <div
+            className={`nav-dropdown ${redCarpetOpen ? 'open' : ''}`}
+            onMouseEnter={() => !isMobile && openDropdown('redCarpet')}
+            onMouseLeave={() => !isMobile && closeDropdowns()}
+          >
+            <button
+              type="button"
+              className={`nav-link ${pathname?.startsWith('/ict-echo-system') ? 'active' : ''}`}
+              aria-expanded={redCarpetOpen}
+              onClick={() => {
+                setRedCarpetOpen((s) => !s);
+                setAdvisoryOpen(false);
+                // setRecognizedOpen(false);
+                setMediaOpen(false);
+              }}
+            >
+              ICT Ecosystem
+              <ChevronDown
+                size={16}
+                style={{
+                  transform: redCarpetOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: '0.3s ease',
+                }}
+              />
+            </button>
+
+            <div className="mega-panel nav-year-dropdown">
+              <ul>
+                <li>
+                  <Link
+                    href="/ict-echo-system/cxo-hub"
+                    className="mega-item"
+                    onClick={closeMobileMenu}
+                  >
+                    CXO Hub
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/ict-echo-system/industry-giants"
+                    className="mega-item"
+                    onClick={closeMobileMenu}
+                  >
+                    Industry Giants & B2B Startups
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
 
           <Link href="/CXOUnfiltered" className="nav-link" onClick={closeMobileMenu}>
             CXO Unfiltered

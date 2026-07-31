@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+// import Link from 'next/link';
+// import { ArrowUpRight } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { fetchWebsiteEvents, type WebsiteEvent } from '@/services/events.service';
+// import { fetchWebsiteEvents, type WebsiteEvent } from '@/services/events.service';
 
 const cards = [
   {
@@ -35,7 +35,7 @@ const cards = [
 ];
 
 export default function CIOpowerlistPage() {
-  const [events, setEvents] = useState<WebsiteEvent[] | null>(null);
+  // const [events, setEvents] = useState<WebsiteEvent[] | null>(null);
 
   const sectionRef = useScrollAnimation<HTMLDivElement>({
     animationClass: 'animate-fade-in-up',
@@ -66,28 +66,28 @@ export default function CIOpowerlistPage() {
     threshold: 0.2,
   });
 
-  const customLeftRef = useScrollAnimation<HTMLDivElement>({
-    animationClass: 'animate-fade-in-left',
-    initialTransform: 'translateX(-40px)',
-    threshold: 0.12,
-  });
+  // const customLeftRef = useScrollAnimation<HTMLDivElement>({
+  //   animationClass: 'animate-fade-in-left',
+  //   initialTransform: 'translateX(-40px)',
+  //   threshold: 0.12,
+  // });
 
-  const customRightRef = useScrollAnimation<HTMLDivElement>({
-    animationClass: 'animate-fade-in-right',
-    initialTransform: 'translateX(40px)',
-    threshold: 0.12,
-  });
+  // const customRightRef = useScrollAnimation<HTMLDivElement>({
+  //   animationClass: 'animate-fade-in-right',
+  //   initialTransform: 'translateX(40px)',
+  //   threshold: 0.12,
+  // });
 
   const cardRefs = [cardRef1, cardRef2, cardRef3, cardRef4];
 
-  useEffect(() => {
-    fetchWebsiteEvents()
-      .then((data) => {
-        if (Array.isArray(data) && data.length) setEvents(data);
-        else setEvents([]);
-      })
-      .catch(() => setEvents([]));
-  }, []);
+  // useEffect(() => {
+  //   fetchWebsiteEvents()
+  //     .then((data) => {
+  //       if (Array.isArray(data) && data.length) setEvents(data);
+  //       else setEvents([]);
+  //     })
+  //     .catch(() => setEvents([]));
+  // }, []);
 
   return (
     <main>
@@ -148,7 +148,7 @@ export default function CIOpowerlistPage() {
         </div>
       </section>
 
-      <section className="project-section">
+      {/* <section className="project-section">
         <div className="project-container">
           <div className="project-heading">
             <h2 className="project-title">
@@ -228,7 +228,7 @@ export default function CIOpowerlistPage() {
             )}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="website-cta-section">
         <div className="website-cta-container">
@@ -244,7 +244,7 @@ export default function CIOpowerlistPage() {
           </p>
 
           <a
-            href="https://cxo-capital.com/ciopowerlistmea/"
+            href="https://mea.ciopowerlist.uatcoremedia.vebsigns.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="website-cta-btn"
