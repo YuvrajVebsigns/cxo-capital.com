@@ -4962,6 +4962,13 @@ main.advisory-page .pagination-pages {
   .contact-grid {
     grid-template-columns: 1fr;
   }
+  .contact-popup,
+  .registration-popup {
+    width: calc(100% - 32px);
+    left: 16px;
+    right: 16px;
+    top: 230px;
+  }
 
   .contact-title {
     font-size: 29px;
@@ -4971,6 +4978,49 @@ main.advisory-page .pagination-pages {
     width: 100%;
     justify-content: center;
   }
+}
+.contact-popup {
+  position: fixed;
+  margin-top: -15px;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 360px;
+  width: auto;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.98);
+  color: #7a0d0d;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+}
+
+.contact-popup p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.contact-popup-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #a6191b;
+  flex-shrink: 0;
+}
+
+.contact-popup button {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
 }
 /* =========================
    BLOG SECTION
@@ -6694,7 +6744,7 @@ main.advisory-page .pagination-pages {
 
 .registration-popup {
   position: fixed;
-  top: 24px;
+  top: 74px;
   right: 24px;
   z-index: 9999;
   display: flex;
@@ -11645,19 +11695,19 @@ s .dialogues-badge-mark {
   justify-content: flex-start;
 }
 .event-action-btn {
-  min-width: 220px;
-  height: 64px;
+  min-width: 100px;
+  height: 50px;
   padding: 6px 8px 6px 22px;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 14px;
   color: #ffffff;
   background: linear-gradient(90deg, #ad0505 0%, #970000 100%);
   border: 0;
   border-radius: 999px;
   font-family: inherit;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
@@ -11674,9 +11724,9 @@ s .dialogues-badge-mark {
   box-shadow: 0 12px 26px rgba(151, 0, 0, 0.25);
 }
 .event-action-btn-icon {
-  width: 44px;
-  height: 44px;
-  flex: 0 0 44px;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -11687,6 +11737,7 @@ s .dialogues-badge-mark {
     transform 0.25s ease,
     background-color 0.25s ease;
 }
+
 .event-action-btn:hover .event-action-btn-icon {
   transform: rotate(45deg);
 }
