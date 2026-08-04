@@ -12,6 +12,7 @@ export default function Navbar() {
   const [isHidden, setIsHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [advisoryOpen, setAdvisoryOpen] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
   const [redCarpetOpen, setRedCarpetOpen] = useState(false);
   // const [recognizedOpen, setRecognizedOpen] = useState(false);
   const [mediaOpen, setMediaOpen] = useState(false);
@@ -23,6 +24,7 @@ export default function Navbar() {
   const lastScrollY = useRef(0);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dropdownTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const feedbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // const advisoryYears = [
   //   2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013,
@@ -108,6 +110,34 @@ export default function Navbar() {
       if (dropdownTimer.current) clearTimeout(dropdownTimer.current);
     };
   }, [mobileOpen]);
+
+  useEffect(() => {
+    const handleFeedback = (event: Event) => {
+      const customEvent = event as CustomEvent<{ message?: string }>;
+      const message = customEvent.detail?.message?.trim();
+
+      if (!message) return;
+
+      setFeedbackMessage(message);
+
+      if (feedbackTimer.current) {
+        clearTimeout(feedbackTimer.current);
+      }
+
+      feedbackTimer.current = setTimeout(() => {
+        setFeedbackMessage(null);
+      }, 3000);
+    };
+
+    window.addEventListener('cxo-connect-feedback', handleFeedback as EventListener);
+
+    return () => {
+      window.removeEventListener('cxo-connect-feedback', handleFeedback as EventListener);
+      if (feedbackTimer.current) {
+        clearTimeout(feedbackTimer.current);
+      }
+    };
+  }, []);
 
   return (
     <header
@@ -466,12 +496,20 @@ export default function Navbar() {
         </nav>
 
         <div className="navbar-actions">
-          <Link href="/#contact-section" className="talk-btn" onClick={closeMobileMenu}>
-            <span>Let’s Talk</span>
-            <div className="talk-btn-icon">
-              <ArrowUpRight size={18} />
-            </div>
-          </Link>
+          <div className="navbar-feedback-wrap">
+            {feedbackMessage ? (
+              <div className="navbar-feedback-pill" role="status" aria-live="polite">
+                {feedbackMessage}
+              </div>
+            ) : null}
+
+            <Link href="/#contact-section" className="talk-btn" onClick={closeMobileMenu}>
+              <span>Let’s Talk</span>
+              <div className="talk-btn-icon">
+                <ArrowUpRight size={18} />
+              </div>
+            </Link>
+          </div>
 
           <button
             className={`menu-btn ${mobileOpen ? 'open' : ''}`}

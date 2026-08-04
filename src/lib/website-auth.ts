@@ -226,6 +226,11 @@ export function getWebsiteDomain(): string {
   return process.env.NEXT_PUBLIC_WEBSITE_DOMAIN || 'https://ciochoice.com';
 }
 
+export function getWebsiteId(): string | null {
+  const envId = process.env.NEXT_PUBLIC_WEBSITE_ID?.trim();
+  return envId ? envId : null;
+}
+
 export function readStoredWebsiteAuth(): WebsiteAuth | null {
   if (typeof window === 'undefined') return null;
 
@@ -288,9 +293,17 @@ export async function ensureWebsiteAuth(domain?: string): Promise<WebsiteAuth> {
   }
 
   const resolvedDomain = domain || getWebsiteDomain();
+  const envWebsiteId = getWebsiteId();
 
   const stored = readStoredWebsiteAuth();
-  if (stored) return stored;
+  if (stored) {
+    if (envWebsiteId && stored.websiteId !== envWebsiteId) {
+      const updated = { ...stored, websiteId: envWebsiteId };
+      window.localStorage.setItem('websiteAuth', JSON.stringify(updated));
+      return updated;
+    }
+    return stored;
+  }
 
   const tokenRes = await apiFetch<WebsiteTokenResponse>(
     `${API_ENDPOINTS.WEBSITE.TOKEN}?domain=${encodeURIComponent(resolvedDomain)}`,
@@ -306,10 +319,13 @@ export async function ensureWebsiteAuth(domain?: string): Promise<WebsiteAuth> {
   );
 
   const token = extractWebsiteToken(tokenRes);
-  const websiteId = extractWebsiteId(tokenRes);
+  const responseWebsiteId = extractWebsiteId(tokenRes);
+  const websiteId = envWebsiteId ?? responseWebsiteId;
 
   if (!token || !websiteId) {
-    throw new Error('Could not obtain website token. Check website domain and API URL.');
+    throw new Error(
+      'Could not obtain website token. Check website domain, website ID, and API URL.',
+    );
   }
 
   const value: WebsiteAuth = { token, websiteId };

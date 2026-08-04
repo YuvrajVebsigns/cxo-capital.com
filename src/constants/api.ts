@@ -72,6 +72,7 @@ export const API_ENDPOINTS = {
 
     ATTENDEES: {
       REGISTER: '/api/v1/website/attendees/register',
+      CXO_NETWORK: '/api/v1/website/attendees/cxo-network',
     },
 
     EVENTS: {

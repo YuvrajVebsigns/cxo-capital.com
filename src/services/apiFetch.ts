@@ -38,6 +38,28 @@ export async function apiFetch<T>(endpoint: string, options: FetchOptions = {}):
 
   const url = `${API_BASE_URL}${endpoint}`;
 
+  // Conditional debug: capture request/response for CXO network endpoint to aid troubleshooting.
+  const shouldDebugCxo =
+    endpoint.includes('/attendees/cxo-network') || endpoint.includes('cxo-network');
+  if (shouldDebugCxo) {
+    try {
+      // eslint-disable-next-line no-console
+      // console.log('apiFetch DEBUG - CXO request ->', url);
+      // eslint-disable-next-line no-console
+      // console.log('apiFetch DEBUG - request headers:', JSON.stringify(config.headers, null, 2));
+      // eslint-disable-next-line no-console
+      if ((config as unknown as { body?: unknown }).body) {
+        // eslint-disable-next-line no-console
+        console.log(
+          'apiFetch DEBUG - request body:',
+          (config as unknown as { body?: unknown }).body,
+        );
+      }
+    } catch (e) {
+      void e;
+    }
+  }
+
   try {
     const response = await fetch(url, config);
 
@@ -51,11 +73,23 @@ export async function apiFetch<T>(endpoint: string, options: FetchOptions = {}):
     }
 
     if (!response.ok) {
-      throw new ApiError(
-        data?.message || response.statusText || 'An error occurred',
-        response.status,
-        data,
-      );
+      const responseMessage =
+        typeof data === 'string'
+          ? data
+          : data?.message || data?.error || response.statusText || 'An error occurred';
+
+      if (shouldDebugCxo) {
+        try {
+          // eslint-disable-next-line no-console
+          // console.error('apiFetch DEBUG - CXO response status:', response.status);
+          // eslint-disable-next-line no-console
+          // console.error('apiFetch DEBUG - CXO response body:', JSON.stringify(data, null, 2));
+        } catch (e) {
+          void e;
+        }
+      }
+
+      throw new ApiError(responseMessage, response.status, data);
     }
 
     return data as T;
