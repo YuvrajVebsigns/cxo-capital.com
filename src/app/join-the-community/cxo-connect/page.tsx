@@ -12,122 +12,157 @@
 //   'ITDMs – Senior Most Information Technology Decision Makers',
 // ];
 
-// export default function CxoConnectPage() {
-//   const [formData, setFormData] = useState({
-//     firstName: '',
-//     lastName: '',
-//     title: '',
-//     designation: '',
-//     officialEmail: '',
-//     telephone: '',
-//     mobile: '',
-//     linkedin: '',
-//     companyName: '',
-//     companyAddress: '',
-//     city: '',
-//     state: '',
-//     postalCode: '',
-//     country: '',
-//     companyCategory: '',
-//     businessVertical: '',
-//   });
-//   const [submitting, setSubmitting] = useState(false);
-//   const [submitError, setSubmitError] = useState<string | null>(null);
-//   const [submitSuccess, setSubmitSuccess] = useState(false);
+// const initialFormData = {
+//   firstName: '',
+//   lastName: '',
+//   title: '',
+//   designation: '',
+//   officialEmail: '',
+//   telephone: '',
+//   mobile: '',
+//   linkedin: '',
+//   companyName: '',
+//   companyAddress: '',
+//   city: '',
+//   state: '',
+//   postalCode: '',
+//   country: '',
+//   companyCategory: '',
+//   businessVertical: '',
+// };
 
-//   const handleChange = (field: string, value: string) => {
-//     setFormData((prev) => ({
-//       ...prev,
+// export default function CxoConnectPage() {
+//   const [formData, setFormData] = useState(initialFormData);
+
+//   const [submitting, setSubmitting] = useState(false);
+
+//   const [submitError, setSubmitError] =
+//     useState<string | null>(null);
+
+//   const [submitSuccess, setSubmitSuccess] =
+//     useState(false);
+
+//   function handleChange(
+//     field: keyof typeof initialFormData,
+//     value: string,
+//   ) {
+//     setFormData((previous) => ({
+//       ...previous,
 //       [field]: value,
 //     }));
-//   };
+//   }
 
-//   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+//   async function handleSubmit(
+//     event: FormEvent<HTMLFormElement>,
+//   ) {
 //     event.preventDefault();
+
+//     if (submitting) {
+//       return;
+//     }
+
 //     setSubmitting(true);
 //     setSubmitError(null);
 //     setSubmitSuccess(false);
 
 //     try {
-//       if (!formData.designation.trim()) {
-//         throw new Error('Current Designation is required.');
-//       }
+//       console.log('========== FORM DATA ==========');
+//       console.log(
+//         JSON.stringify(formData, null, 2),
+//       );
+//       console.log('================================');
 
-//       if (!formData.officialEmail.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.officialEmail)) {
-//         throw new Error('Please enter a valid email address.');
-//       }
+//       const response =
+//         await submitCxoNetworkApplication({
+//           firstName: formData.firstName,
+//           lastName: formData.lastName,
+//           title: formData.title,
+//           designation: formData.designation,
+//           officialEmail: formData.officialEmail,
+//           telephone: formData.telephone,
+//           mobile: formData.mobile,
+//           linkedin: formData.linkedin,
+//           companyName: formData.companyName,
+//           companyAddress: formData.companyAddress,
+//           city: formData.city,
+//           state: formData.state,
+//           postalCode: formData.postalCode,
+//           country: formData.country,
+//           companyCategory:
+//             formData.companyCategory,
+//           businessVertical:
+//             formData.businessVertical,
+//         });
 
-//       await submitCxoNetworkApplication({
-//         firstName: formData.firstName,
-//         lastName: formData.lastName,
-//         title: formData.title,
-//         currentDesignation: formData.designation,
-//         email: formData.officialEmail,
-//         telephoneNo: formData.telephone,
-//         cioMobilePhone: formData.mobile,
-//         linkedInLink: formData.linkedin,
-//         companyName: formData.companyName,
-//         companyAddress: formData.companyAddress,
-//         city: formData.city,
-//         state: formData.state,
-//         postalCode: formData.postalCode,
-//         country: formData.country,
-//         companyCategory: formData.companyCategory,
-//         businessVertical: formData.businessVertical,
-//       });
+//       console.log(
+//         'CXO NETWORK SUCCESS:',
+//         response,
+//       );
+
 //       setSubmitSuccess(true);
-//       setFormData({
-//         firstName: '',
-//         lastName: '',
-//         title: '',
-//         designation: '',
-//         officialEmail: '',
-//         telephone: '',
-//         mobile: '',
-//         linkedin: '',
-//         companyName: '',
-//         companyAddress: '',
-//         city: '',
-//         state: '',
-//         postalCode: '',
-//         country: '',
-//         companyCategory: '',
-//         businessVertical: '',
-//       });
+
+//       setFormData(initialFormData);
 //     } catch (error: unknown) {
+//       console.error(
+//         'CXO NETWORK SUBMIT ERROR:',
+//         error,
+//       );
+
 //       setSubmitError(
-//         error instanceof Error ? error.message : 'Unable to submit your application. Please try again.',
+//         error instanceof Error
+//           ? error.message
+//           : 'Unable to submit your application. Please try again.',
 //       );
 //     } finally {
 //       setSubmitting(false);
 //     }
-//   };
-
-//   // console.log(formData);
+//   }
 
 //   return (
 //     <main className="cxo-join-page">
+//       {/* =====================================================
+//           HERO
+//       ===================================================== */}
+
 //       <section className="cxo-join-hero">
 //         <div className="cxo-join-container">
-//           <p className="cxo-join-breadcrumb">Join Us</p>
+//           <p className="cxo-join-breadcrumb">
+//             Join Us
+//           </p>
+
 //           <h1>CXO Connect</h1>
 //         </div>
 //       </section>
 
+//       {/* =====================================================
+//           CONTENT
+//       ===================================================== */}
+
 //       <section className="cxo-join-section">
 //         <div className="cxo-join-container cxo-join-grid">
+//           {/* =================================================
+//               LEFT CONTENT
+//           ================================================= */}
+
 //           <div className="cxo-join-content">
-//             <span className="cxo-join-label">CXO Hub Network</span>
+//             <span className="cxo-join-label">
+//               CXO Hub Network
+//             </span>
+
 //             <h2>Dear CXO,</h2>
 
 //             <p>
-//               We invite <strong>YOU</strong> to join our network. I look forward to forging a
-//               mutually beneficial and collaborative partnership.
+//               We invite <strong>YOU</strong> to join our
+//               network. I look forward to forging a
+//               mutually beneficial and collaborative
+//               partnership.
 //             </p>
 
 //             <p>
-//               Thank you for entrusting us with the opportunity to contribute to your success.
-//               Together, we will shape a future where technology empowers and connects us all.
+//               Thank you for entrusting us with the
+//               opportunity to contribute to your success.
+//               Together, we will shape a future where
+//               technology empowers and connects us all.
 //             </p>
 
 //             <div className="cxo-join-signature">
@@ -136,7 +171,10 @@
 //             </div>
 
 //             <div className="cxo-eligible-box">
-//               <h3>CXO Titles Eligible to Join the Network:</h3>
+//               <h3>
+//                 CXO Titles Eligible to Join the Network:
+//               </h3>
+
 //               <ul>
 //                 {eligibleTitles.map((title) => (
 //                   <li key={title}>{title}</li>
@@ -145,156 +183,344 @@
 //             </div>
 //           </div>
 
-//           <form className="cxo-join-form" onSubmit={handleSubmit}>
+//           {/* =================================================
+//               FORM
+//           ================================================= */}
+
+//           <form
+//             className="cxo-join-form"
+//             onSubmit={handleSubmit}
+//           >
 //             <h2>Join the Network</h2>
-//             {submitSuccess && <p className="form-success">Your application has been submitted successfully.</p>}
-//             {submitError && <p className="form-error">{submitError}</p>}
+
+//             {submitSuccess && (
+//               <div className="success-popup" role="alert">
+//                 <div className="success-popup-icon">✓</div>
+
+//                 <div className="success-popup-content">
+//                   <strong>Success!</strong>
+//                   <p>Your application has been submitted successfully.</p>
+//                 </div>
+
+//                 <button
+//                   type="button"
+//                   className="success-popup-close"
+//                   onClick={() => setSubmitSuccess(false)}
+//                   aria-label="Close success message"
+//                 >
+//                   ×
+//                 </button>
+//               </div>
+//             )}
+
+//             {submitError && (
+//               <p className="form-error">
+//                 {submitError}
+//               </p>
+//             )}
+
+//             {/* First Name / Last Name */}
 
 //             <div className="cxo-form-row">
 //               <input
 //                 type="text"
 //                 placeholder="First Name"
+//                 required
 //                 value={formData.firstName}
-//                 onChange={(e) =>
-//                   handleChange('firstName', e.target.value.replace(/[^A-Za-z\s]/g, ''))
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'firstName',
+//                     event.target.value.replace(
+//                       /[^A-Za-z\s]/g,
+//                       '',
+//                     ),
+//                   )
 //                 }
 //               />
 
 //               <input
 //                 type="text"
 //                 placeholder="Last Name"
+//                 required
 //                 value={formData.lastName}
-//                 onChange={(e) =>
-//                   handleChange('lastName', e.target.value.replace(/[^A-Za-z\s]/g, ''))
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'lastName',
+//                     event.target.value.replace(
+//                       /[^A-Za-z\s]/g,
+//                       '',
+//                     ),
+//                   )
 //                 }
 //               />
 //             </div>
+
+//             {/* Title / Designation */}
 
 //             <div className="cxo-form-row">
 //               <input
 //                 type="text"
 //                 placeholder="Title"
+//                 required
 //                 value={formData.title}
-//                 onChange={(e) => handleChange('title', e.target.value.replace(/[^A-Za-z\s.]/g, ''))}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'title',
+//                     event.target.value.replace(
+//                       /[^A-Za-z\s.]/g,
+//                       '',
+//                     ),
+//                   )
+//                 }
 //               />
 
 //               <input
 //                 type="text"
 //                 placeholder="Current Designation"
+//                 required
 //                 value={formData.designation}
-//                 onChange={(e) => handleChange('designation', e.target.value)}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'designation',
+//                     event.target.value,
+//                   )
+//                 }
 //               />
 //             </div>
+
+//             {/* Email / Telephone */}
 
 //             <div className="cxo-form-row">
 //               <input
 //                 type="email"
 //                 placeholder="Email (Official)"
+//                 required
 //                 value={formData.officialEmail}
-//                 onChange={(e) => handleChange('officialEmail', e.target.value)}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'officialEmail',
+//                     event.target.value,
+//                   )
+//                 }
 //               />
 
 //               <input
 //                 type="tel"
 //                 placeholder="Telephone No"
-//                 maxLength={20}
+//                 required
+//                 maxLength={15}
 //                 value={formData.telephone}
-//                 onChange={(e) => handleChange('telephone', e.target.value.replace(/[^0-9+\s]/g, ''))}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'telephone',
+//                     event.target.value.replace(
+//                       /[^0-9+]/g,
+//                       '',
+//                     ),
+//                   )
+//                 }
 //               />
 //             </div>
+
+//             {/* Mobile / LinkedIn */}
 
 //             <div className="cxo-form-row">
 //               <input
 //                 type="tel"
 //                 placeholder="CIO Mobile Phone"
-//                 maxLength={20}
+//                 required
+//                 maxLength={15}
 //                 value={formData.mobile}
-//                 onChange={(e) => handleChange('mobile', e.target.value.replace(/[^0-9+\s]/g, ''))}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'mobile',
+//                     event.target.value.replace(
+//                       /[^0-9+]/g,
+//                       '',
+//                     ),
+//                   )
+//                 }
 //               />
 
 //               <input
 //                 type="url"
 //                 placeholder="LinkedIn Link"
+//                 required
 //                 value={formData.linkedin}
-//                 onChange={(e) => handleChange('linkedin', e.target.value)}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'linkedin',
+//                     event.target.value,
+//                   )
+//                 }
 //               />
 //             </div>
+
+//             {/* Company Name / Address */}
 
 //             <div className="cxo-form-row">
 //               <input
 //                 type="text"
 //                 placeholder="Company Name"
+//                 required
 //                 value={formData.companyName}
-//                 onChange={(e) => handleChange('companyName', e.target.value)}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'companyName',
+//                     event.target.value,
+//                   )
+//                 }
 //               />
 
 //               <textarea
 //                 className="company-address-field"
 //                 placeholder="Company Address"
 //                 rows={1}
+//                 required
 //                 value={formData.companyAddress}
-//                 onChange={(e) => handleChange('companyAddress', e.target.value)}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'companyAddress',
+//                     event.target.value,
+//                   )
+//                 }
 //               />
 //             </div>
+
+//             {/* City / State */}
 
 //             <div className="cxo-form-row">
 //               <input
 //                 type="text"
 //                 placeholder="City"
+//                 required
 //                 value={formData.city}
-//                 onChange={(e) => handleChange('city', e.target.value.replace(/[^A-Za-z\s]/g, ''))}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'city',
+//                     event.target.value.replace(
+//                       /[^A-Za-z\s]/g,
+//                       '',
+//                     ),
+//                   )
+//                 }
 //               />
 
 //               <input
 //                 type="text"
 //                 placeholder="State"
+//                 required
 //                 value={formData.state}
-//                 onChange={(e) => handleChange('state', e.target.value.replace(/[^A-Za-z\s]/g, ''))}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'state',
+//                     event.target.value.replace(
+//                       /[^A-Za-z\s]/g,
+//                       '',
+//                     ),
+//                   )
+//                 }
 //               />
 //             </div>
+
+//             {/* Postal / Country */}
 
 //             <div className="cxo-form-row">
 //               <input
 //                 type="text"
 //                 placeholder="Postal Code / ZIP"
+//                 required
 //                 maxLength={10}
 //                 value={formData.postalCode}
-//                 onChange={(e) => handleChange('postalCode', e.target.value.replace(/[^0-9]/g, ''))}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'postalCode',
+//                     event.target.value.replace(
+//                       /[^0-9]/g,
+//                       '',
+//                     ),
+//                   )
+//                 }
 //               />
 
 //               <input
 //                 type="text"
 //                 placeholder="Country"
+//                 required
 //                 value={formData.country}
-//                 onChange={(e) =>
-//                   handleChange('country', e.target.value.replace(/[^A-Za-z\s]/g, ''))
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'country',
+//                     event.target.value.replace(
+//                       /[^A-Za-z\s]/g,
+//                       '',
+//                     ),
+//                   )
 //                 }
 //               />
 //             </div>
 
+//             {/* Category / Business Vertical */}
+
 //             <div className="cxo-form-row">
 //               <select
+//                 required
 //                 value={formData.companyCategory}
-//                 onChange={(e) => handleChange('companyCategory', e.target.value)}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'companyCategory',
+//                     event.target.value,
+//                   )
+//                 }
 //               >
-//                 <option value="">Company Category</option>
-//                 <option value="enterprise">Enterprise</option>
-//                 <option value="startup">Startup</option>
-//                 <option value="government">Government</option>
-//                 <option value="education">Education</option>
-//                 <option value="other">Other</option>
+//                 <option value="">
+//                   Company Category
+//                 </option>
+
+//                 <option value="Enterprise">
+//                   Enterprise
+//                 </option>
+
+//                 <option value="Startup">
+//                   Startup
+//                 </option>
+
+//                 <option value="Government">
+//                   Government
+//                 </option>
+
+//                 <option value="Education">
+//                   Education
+//                 </option>
+
+//                 <option value="Other">
+//                   Other
+//                 </option>
 //               </select>
 
 //               <input
 //                 type="text"
 //                 placeholder="Business Vertical"
+//                 required
 //                 value={formData.businessVertical}
-//                 onChange={(e) => handleChange('businessVertical', e.target.value)}
+//                 onChange={(event) =>
+//                   handleChange(
+//                     'businessVertical',
+//                     event.target.value,
+//                   )
+//                 }
 //               />
 //             </div>
 
-//             <button type="submit" disabled={submitting}>
-//               {submitting ? 'Submitting...' : 'Submit'}
+//             {/* Submit */}
+
+//             <button
+//               type="submit"
+//               disabled={submitting}
+//             >
+//               {submitting
+//                 ? 'Submitting...'
+//                 : 'Submit'}
 //             </button>
 //           </form>
 //         </div>
@@ -305,7 +531,7 @@
 
 'use client';
 
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { submitCxoNetworkApplication } from '@/services/attendees.service';
 
 const eligibleTitles = [
@@ -317,113 +543,96 @@ const eligibleTitles = [
   'ITDMs – Senior Most Information Technology Decision Makers',
 ];
 
-/**
- * Website ID required by the backend.
- *
- * Add this to .env.local:
- *
- * NEXT_PUBLIC_WEBSITE_ID=507f1f77bcf86cd799439012
- *
- * Replace the value with your actual websiteId.
- */
-const WEBSITE_ID = process.env.NEXT_PUBLIC_WEBSITE_ID || '';
+const initialFormData = {
+  firstName: '',
+  lastName: '',
+  title: '',
+  designation: '',
+  officialEmail: '',
+  telephone: '',
+  mobile: '',
+  linkedin: '',
+  companyName: '',
+  companyAddress: '',
+  city: '',
+  state: '',
+  postalCode: '',
+  country: '',
+  companyCategory: '',
+  businessVertical: '',
+};
 
 export default function CxoConnectPage() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    title: '',
-    designation: '',
-    officialEmail: '',
-    telephone: '',
-    mobile: '',
-    linkedin: '',
-    companyName: '',
-    companyAddress: '',
-    city: '',
-    state: '',
-    postalCode: '',
-    country: '',
-    companyCategory: '',
-    businessVertical: '',
-  });
+  const [formData, setFormData] = useState(initialFormData);
 
   const [submitting, setSubmitting] = useState(false);
+
   const [submitError, setSubmitError] = useState<string | null>(null);
+
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleChange = (field: keyof typeof formData, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
+  // Automatically hide success popup after 3 seconds
+  useEffect(() => {
+    if (!submitSuccess) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setSubmitSuccess(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [submitSuccess]);
+
+  function handleChange(field: keyof typeof initialFormData, value: string) {
+    setFormData((previous) => ({
+      ...previous,
       [field]: value,
     }));
-  };
+  }
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (submitting) {
+      return;
+    }
 
     setSubmitting(true);
     setSubmitError(null);
     setSubmitSuccess(false);
 
-    /**
-     * Website ID is required by backend.
-     */
-    if (!WEBSITE_ID) {
-      setSubmitError(
-        'Website ID is missing. Please configure NEXT_PUBLIC_WEBSITE_ID in .env.local.',
-      );
-      setSubmitting(false);
-      return;
-    }
-
     try {
+      // console.log('========== FORM DATA ==========');
+      // console.log(JSON.stringify(formData, null, 2));
+      // console.log('================================');
+
       await submitCxoNetworkApplication({
         firstName: formData.firstName,
         lastName: formData.lastName,
         title: formData.title,
-
         designation: formData.designation,
         officialEmail: formData.officialEmail,
         telephone: formData.telephone,
         mobile: formData.mobile,
         linkedin: formData.linkedin,
-
         companyName: formData.companyName,
         companyAddress: formData.companyAddress,
         city: formData.city,
         state: formData.state,
         postalCode: formData.postalCode,
         country: formData.country,
-
         companyCategory: formData.companyCategory,
         businessVertical: formData.businessVertical,
-
-        websiteId: WEBSITE_ID,
       });
 
+      // Show success popup
       setSubmitSuccess(true);
 
-      setFormData({
-        firstName: '',
-        lastName: '',
-        title: '',
-        designation: '',
-        officialEmail: '',
-        telephone: '',
-        mobile: '',
-        linkedin: '',
-        companyName: '',
-        companyAddress: '',
-        city: '',
-        state: '',
-        postalCode: '',
-        country: '',
-        companyCategory: '',
-        businessVertical: '',
-      });
+      // Reset form
+      setFormData(initialFormData);
     } catch (error: unknown) {
-      // console.error('CXO Network submission error:', error);
+      // console.error('CXO NETWORK SUBMIT ERROR:', error);
 
       setSubmitError(
         error instanceof Error
@@ -433,10 +642,14 @@ export default function CxoConnectPage() {
     } finally {
       setSubmitting(false);
     }
-  };
+  }
 
   return (
     <main className="cxo-join-page">
+      {/* =====================================================
+          HERO
+      ===================================================== */}
+
       <section className="cxo-join-hero">
         <div className="cxo-join-container">
           <p className="cxo-join-breadcrumb">Join Us</p>
@@ -445,11 +658,15 @@ export default function CxoConnectPage() {
         </div>
       </section>
 
+      {/* =====================================================
+          CONTENT
+      ===================================================== */}
+
       <section className="cxo-join-section">
         <div className="cxo-join-container cxo-join-grid">
-          {/* ---------------------------------------------------------------- */}
-          {/* LEFT CONTENT                                                     */}
-          {/* ---------------------------------------------------------------- */}
+          {/* =================================================
+              LEFT CONTENT
+          ================================================= */}
 
           <div className="cxo-join-content">
             <span className="cxo-join-label">CXO Hub Network</span>
@@ -468,7 +685,6 @@ export default function CxoConnectPage() {
 
             <div className="cxo-join-signature">
               <p>Regards,</p>
-
               <h3>Anoop Mathur</h3>
             </div>
 
@@ -483,190 +699,232 @@ export default function CxoConnectPage() {
             </div>
           </div>
 
-          {/* ---------------------------------------------------------------- */}
-          {/* FORM                                                              */}
-          {/* ---------------------------------------------------------------- */}
+          {/* =================================================
+              FORM
+          ================================================= */}
 
           <form className="cxo-join-form" onSubmit={handleSubmit}>
             <h2>Join the Network</h2>
 
+            {/* SUCCESS POPUP */}
             {submitSuccess && (
-              <p className="form-success">Your application has been submitted successfully.</p>
+              <div className="success-popup" role="alert">
+                <div className="success-popup-icon">✓</div>
+
+                <div className="success-popup-content">
+                  <strong>Success!</strong>
+
+                  <p>Your application has been submitted successfully.</p>
+                </div>
+
+                <button
+                  type="button"
+                  className="success-popup-close"
+                  onClick={() => setSubmitSuccess(false)}
+                  aria-label="Close success message"
+                >
+                  ×
+                </button>
+              </div>
             )}
 
+            {/* ERROR MESSAGE */}
             {submitError && <p className="form-error">{submitError}</p>}
 
             {/* First Name / Last Name */}
+
             <div className="cxo-form-row">
               <input
                 type="text"
                 placeholder="First Name"
-                value={formData.firstName}
                 required
-                onChange={(e) =>
-                  handleChange('firstName', e.target.value.replace(/[^A-Za-z\s]/g, ''))
+                value={formData.firstName}
+                onChange={(event) =>
+                  handleChange('firstName', event.target.value.replace(/[^A-Za-z\s]/g, ''))
                 }
               />
 
               <input
                 type="text"
                 placeholder="Last Name"
-                value={formData.lastName}
                 required
-                onChange={(e) =>
-                  handleChange('lastName', e.target.value.replace(/[^A-Za-z\s]/g, ''))
+                value={formData.lastName}
+                onChange={(event) =>
+                  handleChange('lastName', event.target.value.replace(/[^A-Za-z\s]/g, ''))
                 }
               />
             </div>
 
             {/* Title / Designation */}
+
             <div className="cxo-form-row">
               <input
                 type="text"
                 placeholder="Title"
-                value={formData.title}
                 required
-                onChange={(e) => handleChange('title', e.target.value.replace(/[^A-Za-z\s.]/g, ''))}
+                value={formData.title}
+                onChange={(event) =>
+                  handleChange('title', event.target.value.replace(/[^A-Za-z\s.]/g, ''))
+                }
               />
 
               <input
                 type="text"
                 placeholder="Current Designation"
-                value={formData.designation}
                 required
-                onChange={(e) => handleChange('designation', e.target.value)}
+                value={formData.designation}
+                onChange={(event) => handleChange('designation', event.target.value)}
               />
             </div>
 
             {/* Email / Telephone */}
+
             <div className="cxo-form-row">
               <input
                 type="email"
                 placeholder="Email (Official)"
-                value={formData.officialEmail}
                 required
-                onChange={(e) => handleChange('officialEmail', e.target.value)}
+                value={formData.officialEmail}
+                onChange={(event) => handleChange('officialEmail', event.target.value)}
               />
 
               <input
                 type="tel"
                 placeholder="Telephone No"
-                maxLength={10}
-                value={formData.telephone}
                 required
-                onChange={(e) => handleChange('telephone', e.target.value.replace(/[^0-9]/g, ''))}
+                maxLength={15}
+                value={formData.telephone}
+                onChange={(event) =>
+                  handleChange('telephone', event.target.value.replace(/[^0-9+]/g, ''))
+                }
               />
             </div>
 
             {/* Mobile / LinkedIn */}
+
             <div className="cxo-form-row">
               <input
                 type="tel"
                 placeholder="CIO Mobile Phone"
-                maxLength={10}
-                value={formData.mobile}
                 required
-                onChange={(e) => handleChange('mobile', e.target.value.replace(/[^0-9]/g, ''))}
+                maxLength={15}
+                value={formData.mobile}
+                onChange={(event) =>
+                  handleChange('mobile', event.target.value.replace(/[^0-9+]/g, ''))
+                }
               />
 
               <input
                 type="url"
                 placeholder="LinkedIn Link"
-                value={formData.linkedin}
                 required
-                onChange={(e) => handleChange('linkedin', e.target.value)}
+                value={formData.linkedin}
+                onChange={(event) => handleChange('linkedin', event.target.value)}
               />
             </div>
 
             {/* Company Name / Address */}
+
             <div className="cxo-form-row">
               <input
                 type="text"
                 placeholder="Company Name"
-                value={formData.companyName}
                 required
-                onChange={(e) => handleChange('companyName', e.target.value)}
+                value={formData.companyName}
+                onChange={(event) => handleChange('companyName', event.target.value)}
               />
 
               <textarea
                 className="company-address-field"
                 placeholder="Company Address"
                 rows={1}
-                value={formData.companyAddress}
                 required
-                onChange={(e) => handleChange('companyAddress', e.target.value)}
+                value={formData.companyAddress}
+                onChange={(event) => handleChange('companyAddress', event.target.value)}
               />
             </div>
 
             {/* City / State */}
+
             <div className="cxo-form-row">
               <input
                 type="text"
                 placeholder="City"
-                value={formData.city}
                 required
-                onChange={(e) => handleChange('city', e.target.value.replace(/[^A-Za-z\s]/g, ''))}
+                value={formData.city}
+                onChange={(event) =>
+                  handleChange('city', event.target.value.replace(/[^A-Za-z\s]/g, ''))
+                }
               />
 
               <input
                 type="text"
                 placeholder="State"
-                value={formData.state}
                 required
-                onChange={(e) => handleChange('state', e.target.value.replace(/[^A-Za-z\s]/g, ''))}
+                value={formData.state}
+                onChange={(event) =>
+                  handleChange('state', event.target.value.replace(/[^A-Za-z\s]/g, ''))
+                }
               />
             </div>
 
-            {/* Postal Code / Country */}
+            {/* Postal / Country */}
+
             <div className="cxo-form-row">
               <input
                 type="text"
                 placeholder="Postal Code / ZIP"
+                required
                 maxLength={10}
                 value={formData.postalCode}
-                required
-                onChange={(e) => handleChange('postalCode', e.target.value.replace(/[^0-9]/g, ''))}
+                onChange={(event) =>
+                  handleChange('postalCode', event.target.value.replace(/[^0-9]/g, ''))
+                }
               />
 
               <input
                 type="text"
                 placeholder="Country"
-                value={formData.country}
                 required
-                onChange={(e) =>
-                  handleChange('country', e.target.value.replace(/[^A-Za-z\s]/g, ''))
+                value={formData.country}
+                onChange={(event) =>
+                  handleChange('country', event.target.value.replace(/[^A-Za-z\s]/g, ''))
                 }
               />
             </div>
 
-            {/* Company Category / Business Vertical */}
+            {/* Category / Business Vertical */}
+
             <div className="cxo-form-row">
               <select
+                required
                 value={formData.companyCategory}
-                onChange={(e) => handleChange('companyCategory', e.target.value)}
+                onChange={(event) => handleChange('companyCategory', event.target.value)}
               >
                 <option value="">Company Category</option>
 
-                <option value="enterprise">Enterprise</option>
+                <option value="Enterprise">Enterprise</option>
 
-                <option value="startup">Startup</option>
+                <option value="Startup">Startup</option>
 
-                <option value="government">Government</option>
+                <option value="Government">Government</option>
 
-                <option value="education">Education</option>
+                <option value="Education">Education</option>
 
-                <option value="other">Other</option>
+                <option value="Other">Other</option>
               </select>
 
               <input
                 type="text"
                 placeholder="Business Vertical"
+                required
                 value={formData.businessVertical}
-                onChange={(e) => handleChange('businessVertical', e.target.value)}
+                onChange={(event) => handleChange('businessVertical', event.target.value)}
               />
             </div>
 
             {/* Submit */}
+
             <button type="submit" disabled={submitting}>
               {submitting ? 'Submitting...' : 'Submit'}
             </button>
