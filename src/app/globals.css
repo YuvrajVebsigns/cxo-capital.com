@@ -3331,9 +3331,21 @@ main.advisory-page .pagination-pages {
     padding: 28px 20px;
   }
 
-  .team-image-wrap {
+  /* .team-image-wrap {
     width: 170px;
     height: 180px;
+  } */
+}
+
+@media (max-width: 768px) {
+  .team-image-wrap {
+    width: 170px;
+    height: 220px;
+    background: #f3ebeb;
+  }
+
+  .team-image {
+    object-fit: contain;
   }
 }
 
@@ -5777,6 +5789,35 @@ main.advisory-page .pagination-pages {
 
 .blog-breadcrumb span {
   color: white;
+}
+
+@media (max-width: 768px) {
+  .blog-hero {
+    width: calc(100% - 20px);
+    height: 240px;
+    margin: 90px auto 20px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .blog-hero-media,
+  .blog-hero-overlay {
+    border-radius: 16px;
+  }
+
+  .blog-hero-image {
+    object-fit: cover;
+    object-position: 40% center;
+  }
+
+  .blog-hero-content {
+    padding: 20px;
+  }
+
+  .blog-hero-content h1 {
+    font-size: 28px;
+  }
 }
 
 /* =========================================================
@@ -9810,7 +9851,7 @@ s .dialogues-badge-mark {
 ========================================================= */
 
 .social-media-section {
-  min-height: 100vh;
+  min-height: 20vh;
   padding: 110px 24px 70px !important;
   background:
     radial-gradient(circle at 10% 15%, rgba(142, 1, 1, 0.14), transparent 28%),
@@ -11259,7 +11300,7 @@ s .dialogues-badge-mark {
 }
 
 .cxo-join-hero {
-  padding: 90px 20px 55px;
+  padding: 30px 20px 30px;
   background:
     radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 32%),
     linear-gradient(135deg, #8e0101 0%, #b30000 52%, #4b0000 100%);
@@ -11513,12 +11554,63 @@ s .dialogues-badge-mark {
 }
 
 @media (max-width: 640px) {
-  .cxo-join-form {
-    padding: 22px;
+  .cxo-join-section {
+    padding: 40px 16px;
   }
 
+  .cxo-join-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Stack left content and form */
+  .cxo-join-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Left content first */
+  .cxo-join-content {
+    order: 1;
+    width: 100%;
+  }
+
+  /* Form below eligible box */
+  .cxo-join-form {
+    order: 2;
+    width: 100%;
+    padding: 22px;
+    margin-top: 0;
+  }
+
+  /* Single-column form fields */
   .cxo-form-row {
+    display: grid;
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cxo-form-row input,
+  .cxo-form-row textarea,
+  .cxo-form-row select {
+    width: 100%;
+  }
+
+  .company-address-field {
+    min-height: 90px;
+  }
+
+  .cxo-eligible-box {
+    margin-bottom: 24px;
+  }
+
+  .cxo-join-form h2 {
+    text-align: center;
+  }
+
+  .cxo-join-form button {
+    width: 100%;
   }
 }
 
