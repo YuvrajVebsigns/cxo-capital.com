@@ -4,8 +4,38 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, Send } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
+import { useState } from 'react';
+import { submitWebsiteSubscribe } from '@/services/subscribes.service';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!email.trim()) {
+      setMessage({ type: 'error', text: 'Please enter a valid email' });
+      return;
+    }
+
+    setIsLoading(true);
+    setMessage(null);
+
+    try {
+      await submitWebsiteSubscribe({ email: email.trim() });
+      setMessage({ type: 'success', text: 'Successfully subscribed! Check your email.' });
+      setEmail('');
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Failed to subscribe. Please try again.';
+      setMessage({ type: 'error', text: errorMessage });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <footer className="footer-section">
       {/* MAIN FOOTER */}
@@ -71,13 +101,37 @@ export default function Footer() {
             <div className="footer-widget">
               <h4 className="footer-title">Subscribe</h4>
 
-              <form className="footer-subscribe">
-                <input type="email" placeholder="Enter your email" className="footer-input" />
+              <form className="footer-subscribe" onSubmit={handleSubscribe}>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="footer-input"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={isLoading}
+                  required
+                />
 
-                <button type="submit" className="footer-submit" aria-label="Subscribe">
+                <button
+                  type="submit"
+                  className="footer-submit"
+                  aria-label="Subscribe"
+                  disabled={isLoading}
+                >
                   <Send size={18} />
                 </button>
               </form>
+
+              {message && (
+                <div
+                  className={`mt-2 text-sm ${
+                    message.type === 'success' ? 'text-green-500' : 'text-red-500'
+                  }`}
+                >
+                  {message.text}
+                </div>
+              )}
+
               <br />
               <h2 className="footer-description1">Office Address</h2>
               <p className="footer-description">
